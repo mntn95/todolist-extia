@@ -72,12 +72,22 @@ const App = () => {
       }
       return task;
     });
+    updateBackgroundColor();
     setTasks(newTasks);
   };
 
   const taskDone = (id) => () => {
     handleTask(id, "done");
   };
+
+  const updateBackgroundColor = () => {
+    const colorPalette = ['red', 'green', 'blue', 'dark', 'light'];
+    const newColor = colorPalette[Math.floor(Math.random()*colorPalette.length)];
+    if (document.body.className === newColor) {
+      return updateBackgroundColor();
+    }
+    document.body.className = newColor;
+  }
 
   return (
       <div className="app">
