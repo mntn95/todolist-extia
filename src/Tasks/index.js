@@ -27,13 +27,12 @@ const useStyles = makeStyles((theme) => ({
 
 const Tasks = ({tasks, handleTaskDone}) => {
   const classes = useStyles();
-
   return (
     <List className={classes.root} component="nav">
       {tasks.map(({label, id, done}, index) => (
         <Fragment key={id}>
           <ListItem button>
-            <ListItemText className={done && 'task--done'} primary={label} />
+            <ListItemText className={done ? 'task--done' : undefined} primary={label} />
             <button onClick={handleTaskDone(id)}>
                   {(done ? '❌': '✔️')}
             </button>

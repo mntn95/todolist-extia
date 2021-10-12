@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import Button from "@material-ui/core/Button";
 
 // styles
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./app.scss";
 // components
 import Form from "./Form/index";
@@ -11,6 +11,8 @@ import Tasks from "./Tasks/index";
 
 const App = () => {
   const [input, setInput] = useState("");
+  const [cachedTasks, setCachedTasks] = useState([]);
+  const [sorted, setSorted] = useState(false);
   // initial tasks
   const [tasks, setTasks] = useState([
     {
@@ -39,15 +41,25 @@ const App = () => {
         },
         ...tasks,
       ]);
+      // clearing input
       setInput("");
     }
   };
 
   const sortTasks = () => {
-    console.log("sort");
-    const sortedTasks = tasks.sort((a, b) => (a.done > b.done ? 1 : -1));
-    console.log(sortedTasks);
-    setTasks(sortedTasks);
+    // putting tasks in cache
+    setCachedTasks([...tasks]);
+    // toggling sorted switch
+    setSorted(!sorted);
+
+    // if tasks aren't sorted
+    if (!sorted) {
+      // sort them
+      setTasks([...tasks.sort((a, b) => (a.done > b.done ? 1 : -1))]);
+    } else {
+      // restore previous tasks order
+      setTasks([...cachedTasks])
+    }
   };
 
   const handleTask = (id, prop) => {
