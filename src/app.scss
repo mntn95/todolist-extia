@@ -24,6 +24,12 @@
     border-radius: 15px;
   }
 }
+.upper {
+  text-transform: uppercase!important;
+}
+.lower {
+  text-transform: lowercase!important;
+}
 
 .red {
   background-color: rgb(85, 7, 7);

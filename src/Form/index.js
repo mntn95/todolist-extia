@@ -22,9 +22,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Form = ({onInputChange, inputValue, onSubmit}) => {
+const Form = ({onInputChange, uppercase, inputValue, onSubmit}) => {
   const classes = useStyles();
 
+  /**
+   * Handlers
+   */
   const handleChange = (e) => {
     const { value } = e.target;
     onInputChange(value);
@@ -38,14 +41,13 @@ const Form = ({onInputChange, inputValue, onSubmit}) => {
     <form autoComplete="off" className={`${classes.root} form`} onSubmit={handleSubmit}>
       <TextField
         id="filled-basic"
-        label="Filled"
-        className="form--input"
         label="New Todo"
+        className="form--input"
         variant="filled"
         value={inputValue}
         onChange={handleChange}
         />
-      <Button className="form--button" type="submit" variant="contained" color="primary">
+      <Button className={`form--button ${uppercase ? 'upper' : 'lower'}`} type="submit" variant="contained" color="primary">
         Add ToDo
       </Button>
     </form>
