@@ -1,26 +1,26 @@
 // imports
-import { v4 as uuidv4 } from 'uuid';
-import Button from '@material-ui/core/Button';
+import { v4 as uuidv4 } from "uuid";
+import Button from "@material-ui/core/Button";
 
 // styles
-import { useState, useEffect } from 'react';
-import './app.scss';
+import { useState, useEffect } from "react";
+import "./app.scss";
 // components
-import Form from './Form/index';
-import Tasks from './Tasks/index';
+import Form from "./Form/index";
+import Tasks from "./Tasks/index";
 
 const App = () => {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   // initial tasks
   const [tasks, setTasks] = useState([
     {
       id: uuidv4(),
-      label: 'Checker la todolist',
+      label: "Checker la todolist",
       done: true,
     },
     {
       id: uuidv4(),
-      label: 'Engager Mathieu',
+      label: "Engager Mathieu",
       done: false,
     },
   ]);
@@ -39,13 +39,13 @@ const App = () => {
         },
         ...tasks,
       ]);
-      setInput('');
+      setInput("");
     }
   };
 
   const sortTasks = () => {
-    console.log('sort');
-    const sortedTasks = tasks.sort((a, b) => ((a.done > b.done) ? 1 : -1));
+    console.log("sort");
+    const sortedTasks = tasks.sort((a, b) => (a.done > b.done ? 1 : -1));
     console.log(sortedTasks);
     setTasks(sortedTasks);
   };
@@ -63,33 +63,35 @@ const App = () => {
     setTasks(newTasks);
   };
 
-  const taskDone = id => () => {
-    handleTask(id, 'done');
+  const taskDone = (id) => () => {
+    handleTask(id, "done");
   };
 
   return (
-    <div className="app">
-      <header className="app-header">
-        <h1>TO-DO :</h1>
-      </header>
-      <main>
-        <div className="app-container">
-          <Button type="button" variant="contained" color="primary" onClick={sortTasks}>
-            Sort
-          </Button>
-          <Form
-            inputValue={input}
-            onInputChange={changeInputValue}
-            onSubmit={onSubmit}
-          />
-          <Tasks
-            tasks={tasks}
-            handleTaskDone={id => taskDone(id)}
-          />
-        </div>
-      </main>
-      <footer />
-    </div>
+      <div className="app">
+        <header className="app-header">
+          <h1>TO-DO :</h1>
+        </header>
+        <main>
+          <div className="app-content">
+            <Button
+              type="button"
+              variant="contained"
+              color="primary"
+              onClick={sortTasks}
+            >
+              Sort
+            </Button>
+            <Form
+              inputValue={input}
+              onInputChange={changeInputValue}
+              onSubmit={onSubmit}
+            />
+            <Tasks tasks={tasks} handleTaskDone={(id) => taskDone(id)} />
+          </div>
+        </main>
+        <footer />
+      </div>
   );
 };
 
