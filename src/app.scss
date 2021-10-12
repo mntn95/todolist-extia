@@ -15,13 +15,13 @@
   &-header {
     color: white;
   }
+  &-container {
+    padding: 1rem;
+    width: 90%;
+    margin: auto;
+    background-color: #C8CCE6;
+    border: 5px solid white;
+    border-radius: 15px;
+  }
 }
 
-.container {
-  padding: 1rem;
-  width: 90%;
-  margin: auto;
-  background-color: #C8CCE6;
-  border: 5px solid white;
-  border-radius: 15px;
-}

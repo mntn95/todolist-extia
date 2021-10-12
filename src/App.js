@@ -1,8 +1,9 @@
 // imports
 import { v4 as uuidv4 } from 'uuid';
+import Button from '@material-ui/core/Button';
 
 // styles
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './app.scss';
 // components
 import Form from './Form/index';
@@ -16,18 +17,16 @@ const App = () => {
       id: uuidv4(),
       label: 'Checker la todolist',
       done: true,
-      deleted: false,
     },
     {
       id: uuidv4(),
       label: 'Engager Mathieu',
       done: false,
-      deleted: false,
     },
-  ])
+  ]);
   const changeInputValue = (value) => {
     setInput(value);
-  }
+  };
 
   const onSubmit = () => {
     // preventing empty tasks
@@ -36,12 +35,37 @@ const App = () => {
         {
           id: uuidv4(),
           label: input,
+          done: false,
         },
         ...tasks,
       ]);
       setInput('');
     }
-  }
+  };
+
+  const sortTasks = () => {
+    console.log('sort');
+    const sortedTasks = tasks.sort((a, b) => ((a.done > b.done) ? 1 : -1));
+    console.log(sortedTasks);
+    setTasks(sortedTasks);
+  };
+
+  const handleTask = (id, prop) => {
+    const newTasks = tasks.map((task) => {
+      if (task.id === id) {
+        return {
+          ...task,
+          [prop]: !task[prop],
+        };
+      }
+      return task;
+    });
+    setTasks(newTasks);
+  };
+
+  const taskDone = id => () => {
+    handleTask(id, 'done');
+  };
 
   return (
     <div className="app">
@@ -49,7 +73,10 @@ const App = () => {
         <h1>TO-DO :</h1>
       </header>
       <main>
-        <div className="container">
+        <div className="app-container">
+          <Button type="button" variant="contained" color="primary" onClick={sortTasks}>
+            Sort
+          </Button>
           <Form
             inputValue={input}
             onInputChange={changeInputValue}
@@ -57,13 +84,13 @@ const App = () => {
           />
           <Tasks
             tasks={tasks}
+            handleTaskDone={id => taskDone(id)}
           />
         </div>
       </main>
-      <footer>
-      </footer>
+      <footer />
     </div>
   );
-}
+};
 
 export default App;
