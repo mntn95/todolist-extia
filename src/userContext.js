@@ -14,10 +14,10 @@ export const UserProvider = ({ children }) => {
         theme,
         upperCase,
         setTheme,
-        setUpperCase
+        setUpperCase,
       }}
     >
       {children}
     </UserContext.Provider>
-  )
-}
+  );
+};

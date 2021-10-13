@@ -35,13 +35,8 @@ const App = () => {
    * Context
    */
   const userParameters = useContext(UserContext);
-  const {
-    colorPalette,
-    theme,
-    upperCase,
-    setTheme,
-    setUpperCase
-  } = userParameters;
+  const { colorPalette, theme, upperCase, setTheme, setUpperCase } =
+    userParameters;
   /**
    * Handlers
    */

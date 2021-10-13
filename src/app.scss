@@ -6,10 +6,10 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  @media(max-width: 767px) {
+  @media (max-width: 767px) {
     width: 80%;
   }
-  @media(min-width: 768px)and(max-width: 1023px) {
+  @media (min-width: 768px) and(max-width: 1023px) {
     width: 70%;
   }
   &-header {
@@ -19,16 +19,16 @@
     padding: 1rem;
     width: 90%;
     margin: auto;
-    background-color: #C8CCE6;
+    background-color: #c8cce6;
     border: 5px solid white;
     border-radius: 15px;
   }
 }
 .upper {
-  text-transform: uppercase!important;
+  text-transform: uppercase !important;
 }
 .lower {
-  text-transform: lowercase!important;
+  text-transform: lowercase !important;
 }
 
 .red {
