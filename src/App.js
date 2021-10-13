@@ -35,6 +35,13 @@ const App = () => {
    * Context
    */
   const userParameters = useContext(UserContext);
+  const {
+    colorPalette,
+    theme,
+    upperCase,
+    setTheme,
+    setUpperCase
+  } = userParameters;
   /**
    * Handlers
    */
@@ -75,6 +82,7 @@ const App = () => {
   };
 
   const handleTask = (id, prop) => {
+    // providing new tasks list with updated task
     const newTasks = tasks.map((task) => {
       if (task.id === id) {
         return {
@@ -84,6 +92,7 @@ const App = () => {
       }
       return task;
     });
+    // changing theme
     updateBackgroundColor();
     setTasks(newTasks);
   };
@@ -93,15 +102,16 @@ const App = () => {
   };
 
   const updateBackgroundColor = () => {
-    const colorPalette = ["red", "green", "blue", "dark", "light"];
-
+    // randomly choosing a new theme color from the palette
     const newColor =
       colorPalette[Math.floor(Math.random() * colorPalette.length)];
-    if (userParameters.theme === newColor) {
+    // preventing same color picking
+    if (theme === newColor) {
       return updateBackgroundColor();
     }
-    userParameters.setTheme(newColor);
-    document.body.className = userParameters.theme;
+    setTheme(newColor);
+    // change body color
+    document.body.className = theme;
   };
 
   return (
@@ -113,7 +123,7 @@ const App = () => {
         <div className="app-content">
           <Button
             style={{ margin: "0 1em" }}
-            className={userParameters.upperCase ? "upper" : "lower"}
+            className={upperCase ? "upper" : "lower"}
             type="button"
             variant="contained"
             color="primary"
@@ -123,16 +133,16 @@ const App = () => {
           </Button>
           <Button
             style={{ margin: "0 1em" }}
-            className={userParameters.upperCase ? "upper" : "lower"}
+            className={upperCase ? "upper" : "lower"}
             type="button"
             variant="contained"
             color="primary"
-            onClick={() => userParameters.setUpperCase(!userParameters.upperCase)}
+            onClick={() => setUpperCase(!upperCase)}
           >
-            {userParameters.upperCase ? "Lower" : "Upper"}
+            {upperCase ? "Lower" : "Upper"}
           </Button>
           <Form
-            uppercase={userParameters.upperCase}
+            uppercase={upperCase}
             inputValue={input}
             onInputChange={changeInputValue}
             onSubmit={onSubmit}

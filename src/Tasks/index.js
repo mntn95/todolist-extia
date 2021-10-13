@@ -8,7 +8,6 @@ import Divider from '@material-ui/core/Divider';
 
 // styles
 import './tasks.scss';
-// components
 
 const useStyles = makeStyles((theme) => ({
   root: {
