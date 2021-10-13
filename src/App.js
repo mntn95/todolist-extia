@@ -1,6 +1,8 @@
 // imports
+import { useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Button from "@material-ui/core/Button";
+import { UserContext } from "./userContext";
 
 // styles
 import { useState } from "react";
@@ -17,7 +19,6 @@ const App = () => {
   const [input, setInput] = useState("");
   const [cachedTasks, setCachedTasks] = useState([]);
   const [sorted, setSorted] = useState(false);
-  const [uppercase, setUppercase] = useState(false);
   const [tasks, setTasks] = useState([
     {
       id: uuidv4(),
@@ -30,7 +31,10 @@ const App = () => {
       done: false,
     },
   ]);
-
+  /**
+   * Context
+   */
+  const userParameters = useContext(UserContext);
   /**
    * Handlers
    */
@@ -66,7 +70,7 @@ const App = () => {
       setTasks([...tasks.sort((a, b) => (a.done > b.done ? 1 : -1))]);
     } else {
       // restore previous tasks order
-      setTasks([...cachedTasks])
+      setTasks([...cachedTasks]);
     }
   };
 
@@ -89,52 +93,55 @@ const App = () => {
   };
 
   const updateBackgroundColor = () => {
-    const colorPalette = ['red', 'green', 'blue', 'dark', 'light'];
-    const newColor = colorPalette[Math.floor(Math.random()*colorPalette.length)];
-    if (document.body.className === newColor) {
+    const colorPalette = ["red", "green", "blue", "dark", "light"];
+
+    const newColor =
+      colorPalette[Math.floor(Math.random() * colorPalette.length)];
+    if (userParameters.theme === newColor) {
       return updateBackgroundColor();
     }
-    document.body.className = newColor;
-  }
+    userParameters.setTheme(newColor);
+    document.body.className = userParameters.theme;
+  };
 
   return (
-      <div className="app">
-        <header className="app-header">
-          <h1>TO-DO :</h1>
-        </header>
-        <main>
-          <div className="app-content">
-            <Button
-              style={{margin: '0 1em'}}
-              className={uppercase ? 'upper' : 'lower'}
-              type="button"
-              variant="contained"
-              color="primary"
-              onClick={sortTasks}
-            >
-              Sort
-            </Button>
-            <Button
-              style={{margin: '0 1em'}}
-              className={uppercase ? 'upper' : 'lower'}
-              type="button"
-              variant="contained"
-              color="primary"
-              onClick={() => setUppercase(!uppercase)}
-            >
-              {uppercase ? 'Lower' : 'Upper'}
-            </Button>
-            <Form
-              uppercase={uppercase}
-              inputValue={input}
-              onInputChange={changeInputValue}
-              onSubmit={onSubmit}
-            />
-            <Tasks tasks={tasks} handleTaskDone={(id) => taskDone(id)} />
-          </div>
-        </main>
-        <footer />
-      </div>
+    <div className="app">
+      <header className="app-header">
+        <h1>TO-DO :</h1>
+      </header>
+      <main>
+        <div className="app-content">
+          <Button
+            style={{ margin: "0 1em" }}
+            className={userParameters.upperCase ? "upper" : "lower"}
+            type="button"
+            variant="contained"
+            color="primary"
+            onClick={sortTasks}
+          >
+            Sort
+          </Button>
+          <Button
+            style={{ margin: "0 1em" }}
+            className={userParameters.upperCase ? "upper" : "lower"}
+            type="button"
+            variant="contained"
+            color="primary"
+            onClick={() => userParameters.setUpperCase(!userParameters.upperCase)}
+          >
+            {userParameters.upperCase ? "Lower" : "Upper"}
+          </Button>
+          <Form
+            uppercase={userParameters.upperCase}
+            inputValue={input}
+            onInputChange={changeInputValue}
+            onSubmit={onSubmit}
+          />
+          <Tasks tasks={tasks} handleTaskDone={(id) => taskDone(id)} />
+        </div>
+      </main>
+      <footer />
+    </div>
   );
 };
 
