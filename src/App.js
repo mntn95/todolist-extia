@@ -123,8 +123,6 @@ const App = () => {
       <main>
         <div className="app-content">
           <Buttons
-            upperCase={upperCase}
-            setUpperCase={setUpperCase}
             inputFocus={inputFocus}
             sortTasks={sortTasks}
           />
