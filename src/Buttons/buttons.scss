@@ -1,0 +1,10 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  &--button {
+    margin: 2rem 0;
+    padding: 0.9rem;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+}

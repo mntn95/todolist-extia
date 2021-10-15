@@ -1,7 +1,6 @@
 // imports
 import { useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
-import Button from "@material-ui/core/Button";
 import { UserContext } from "./userContext";
 
 // styles
@@ -11,6 +10,7 @@ import "./app.scss";
 // components
 import Form from "./Form/index";
 import Tasks from "./Tasks/index";
+import Buttons from "./Buttons/index";
 
 const App = () => {
   /**
@@ -122,36 +122,12 @@ const App = () => {
       </header>
       <main>
         <div className="app-content">
-        <Button
-            style={{ margin: "0 1em" }}
-            className={upperCase ? "upper" : "lower"}
-            type="button"
-            variant="contained"
-            color="primary"
-            onClick={inputFocus}
-          >
-            Focus
-          </Button>
-          <Button
-            style={{ margin: "0 1em" }}
-            className={upperCase ? "upper" : "lower"}
-            type="button"
-            variant="contained"
-            color="primary"
-            onClick={sortTasks}
-          >
-            Sort
-          </Button>
-          <Button
-            style={{ margin: "0 1em" }}
-            className={upperCase ? "upper" : "lower"}
-            type="button"
-            variant="contained"
-            color="primary"
-            onClick={() => setUpperCase(!upperCase)}
-          >
-            {upperCase ? "Lower" : "Upper"}
-          </Button>
+          <Buttons
+            upperCase={upperCase}
+            setUpperCase={setUpperCase}
+            inputFocus={inputFocus}
+            sortTasks={sortTasks}
+          />
           <Form
             uppercase={upperCase}
             inputValue={input}
