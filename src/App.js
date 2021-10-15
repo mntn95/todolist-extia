@@ -109,6 +109,12 @@ const App = () => {
     document.body.className = theme;
   };
 
+  const inputFocus = () => {
+    const input = document.querySelector('#filled-basic');
+    // highlighting form input
+    input.focus();
+  }
+
   return (
     <div className="app">
       <header className="app-header">
@@ -116,6 +122,16 @@ const App = () => {
       </header>
       <main>
         <div className="app-content">
+        <Button
+            style={{ margin: "0 1em" }}
+            className={upperCase ? "upper" : "lower"}
+            type="button"
+            variant="contained"
+            color="primary"
+            onClick={inputFocus}
+          >
+            Focus
+          </Button>
           <Button
             style={{ margin: "0 1em" }}
             className={upperCase ? "upper" : "lower"}
