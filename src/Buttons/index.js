@@ -1,12 +1,16 @@
 //imports
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
+import { useContext } from "react";
+import { UserContext } from "../userContext";
 
 // styles
 import "./buttons.scss";
 // components
 
-const Buttons = ({ upperCase, setUpperCase, inputFocus, sortTasks }) => {
+const Buttons = ({ inputFocus, sortTasks }) => {
+  const userParameters = useContext(UserContext);
+  const { upperCase, setUpperCase } = userParameters;
   const buttons = [
     {
       label: "Focus",

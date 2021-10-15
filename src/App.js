@@ -1,10 +1,9 @@
 // imports
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { UserContext } from "./userContext";
 
 // styles
-import { useState } from "react";
 import "./app.scss";
 
 // components
