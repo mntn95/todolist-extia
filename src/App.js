@@ -34,8 +34,7 @@ const App = () => {
    * Context
    */
   const userParameters = useContext(UserContext);
-  const { colorPalette, theme, upperCase, setTheme, setUpperCase } =
-    userParameters;
+  const { colorPalette, theme, upperCase, setTheme } = userParameters;
   /**
    * Handlers
    */
@@ -109,10 +108,10 @@ const App = () => {
   };
 
   const inputFocus = () => {
-    const input = document.querySelector('#filled-basic');
+    const input = document.querySelector("#filled-basic");
     // highlighting form input
     input.focus();
-  }
+  };
 
   return (
     <div className="app">
@@ -121,10 +120,7 @@ const App = () => {
       </header>
       <main>
         <div className="app-content">
-          <Buttons
-            inputFocus={inputFocus}
-            sortTasks={sortTasks}
-          />
+          <Buttons inputFocus={inputFocus} sortTasks={sortTasks} />
           <Form
             uppercase={upperCase}
             inputValue={input}

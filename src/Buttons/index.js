@@ -1,6 +1,5 @@
 //imports
 import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core/styles";
 import { useContext } from "react";
 import { UserContext } from "../userContext";
 
@@ -15,20 +14,24 @@ const Buttons = ({ inputFocus, sortTasks }) => {
     {
       label: "Focus",
       onClick: inputFocus,
+      id: 1,
     },
     {
       label: "Sort",
       onClick: sortTasks,
+      id: 2,
     },
     {
       label: upperCase ? "Lower" : "Upper",
       onClick: () => setUpperCase(!upperCase),
+      id: 3,
     },
   ];
   return (
     <div>
-      {buttons.map(({ label, onClick }) => (
+      {buttons.map(({ label, onClick, id }) => (
         <Button
+          key={id}
           style={{ margin: "0 1em" }}
           className={upperCase ? "upper" : "lower"}
           type="button"
